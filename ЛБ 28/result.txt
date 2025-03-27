@@ -1,0 +1,11 @@
+Seredne arefmetushne: -1.18
+Radoc 1: 6
+Radoc 2: 6
+Radoc 3: 4
+Radoc 4: 6
+Radoc 5: 6
+Radoc 6: 4
+Radoc 7: 5
+Radoc 8: 8
+Radoc 9: 4
+Radoc 10: 4

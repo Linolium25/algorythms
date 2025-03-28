@@ -1,108 +1,91 @@
 #include <iostream>
-#include <vector>
 using namespace std;
 
 class People {
 public:
-    string surname, country, gender, education;
-    int birthYear, age;
+    string prizvyshche;
+    string stat;
+    string osvita;
+    int rikNarodzhennya;
+    int vik;
 
     People() {
-        surname = "Невідомо";
-        country = "Україна";
-        gender = "Невідомо";
-        education = "Середня";
-        birthYear = 2006;
-        age = 2024 - birthYear;
+        prizvyshche = "Nevdomyy";
+        stat = "Nevdomo";
+        osvita = "Nemae";
+        rikNarodzhennya = 2006;
+        vik = 2024 - rikNarodzhennya;
     }
 
-    People(string s, string g, string e, int by) {
-        surname = s;
-        country = "Україна";
-        gender = g;
-        education = e;
-        birthYear = by;
-        age = 2024 - birthYear;
+    People(string p, string s, string o, int rn) {
+        prizvyshche = p;
+        stat = s;
+        osvita = o;
+        rikNarodzhennya = rn;
+        vik = 2024 - rikNarodzhennya;
     }
 
-    People(const People &p) {
-        surname = p.surname;
-        country = p.country;
-        gender = p.gender;
-        education = p.education;
-        birthYear = p.birthYear;
-        age = p.age;
+    People(const People& p) {
+        prizvyshche = p.prizvyshche;
+        stat = p.stat;
+        osvita = p.osvita;
+        rikNarodzhennya = p.rikNarodzhennya;
+        vik = p.vik;
     }
 
-    void input() {
-        cout << "Прізвище: ";
-        cin >> surname;
-        cout << "Стать (ч/ж): ";
-        cin >> gender;
-        cout << "Освіта: ";
-        cin >> education;
-        cout << "Рік народження: ";
-        cin >> birthYear;
-        age = 2024 - birthYear;
-    }
-
-    void display() {
-        cout << surname << ", " << gender << ", Освіта: " << education 
-             << ", Вік: " << age << " років" << endl;
+    void pokazaty() {
+        cout << prizvyshche << " (" << stat << "), " << osvita 
+             << ", Vik: " << vik << "\n";
     }
 };
 
-int main() {
-    vector<People> peopleList = {
-        People("Іваненко", "ч", "Вища", 1995),
-        People("Петренко", "ж", "Середня", 2001),
-        People("Сидорчук", "ч", "Вища", 1987)
-    };
-
-    // Додаємо нового користувача
-    People newPerson;
-    cout << "\nВведіть дані для нової людини:\n";
-    newPerson.input();
-    peopleList.push_back(newPerson);
-
-    // Виведення списку
-    cout << "\nСписок усіх людей:\n";
-    for (People &p : peopleList) p.display();
-
-    // Фільтрація за освітою і віком
-    int minAge;
-    cout << "\nВведіть мінімальний вік для пошуку осіб з вищою освітою: ";
-    cin >> minAge;
-    cout << "\nОсоби з вищою освітою і віком > " << minAge << ":\n";
-    for (People &p : peopleList) {
-        if (p.education == "Вища" && p.age > minAge) p.display();
-    }
-
-    // Видалення за статтю
-    string genderToRemove;
-    cout << "\nВведіть стать для видалення (ч/ж): ";
-    cin >> genderToRemove;
-    for (int i = 0; i < peopleList.size(); i++) {
-        if (peopleList[i].gender == genderToRemove) {
-            peopleList.erase(peopleList.begin() + i);
-            i--;  
+void vydalytyZaStatyu(People lyudy[], int& kilkist, string statDlyaVydalennya) {
+    for (int i = 0; i < kilkist; i++) {
+        if (lyudy[i].stat == statDlyaVydalennya) {
+            for (int j = i; j < kilkist - 1; j++) {
+                lyudy[j] = lyudy[j + 1];
+            }
+            kilkist--; 
+            i--;    
         }
     }
+}
 
-    // Виведення списку після видалення
-    cout << "\nСписок після видалення осіб статі " << genderToRemove << ":\n";
-    for (People &p : peopleList) p.display();
+int main() {
+    const int MAX_LYUDY = 5;
+    int kilkist = 3;
+    
+    People lyudy[MAX_LYUDY] = {
+        People("Shevchenko", "Cholovik", "Vyshcha", 1990),
+        People("Kovalenko", "Zhinka", "Vyshcha", 1985),
+        People("Petrenko", "Cholovik", "Serednya", 2001)
+    };
 
-    // Копіюємо першого і додаємо в початок
-    if (!peopleList.empty()) {
-        People copyPerson = peopleList[0];
-        peopleList.insert(peopleList.begin(), copyPerson);
+    cout << "\n=== Vsi hromadyany ===\n";
+    for (int i = 0; i < kilkist; i++) lyudy[i].pokazaty();
+
+    cout << "\n=== Vyshcha osvita & vik > 30 ===\n";
+    for (int i = 0; i < kilkist; i++)
+        if (lyudy[i].osvita == "Vyshcha" && lyudy[i].vik > 30)
+            lyudy[i].pokazaty();
+
+    vydalytyZaStatyu(lyudy, kilkist, "Cholovik");
+
+    cout << "\n=== Onovlenyy spysok hromadyan ===\n";
+    for (int i = 0; i < kilkist; i++) lyudy[i].pokazaty();
+
+    if (kilkist < MAX_LYUDY) {
+        for (int i = kilkist; i > 0; i--) {
+            lyudy[i] = lyudy[i - 1];
+        }
+        lyudy[0] = People(lyudy[1]); 
+        kilkist++;
     }
 
-    // Виведення після копіювання
-    cout << "\nСписок після копіювання першої людини:\n";
-    for (People &p : peopleList) p.display();
+     cout << "\n=== Kopiyovanyy pershyy hromadyanyn ===\n";
+    for (int i = 0; i < kilkist; i++) lyudy[i].pokazaty();
 
     return 0;
 }
+
 

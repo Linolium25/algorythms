@@ -9,76 +9,53 @@ public:
     double area;
 
     Flat() {
-        address = "Невідомо";
+        address = "Unknown";
         floor = 1;
         rooms = 2;
-        area = 55;
+        area = 55.0;
+        cout << "Default constructor called\n";
     }
 
-    Flat(string addr, int fl) {
-        address = addr;
-        floor = fl;
-        rooms = 2;  
-        area = 55; 
+    Flat(string a, int f) {
+        address = a;
+        floor = f;
+        rooms = 2;
+        area = 55.0;
+        cout << "Parameterized constructor called for " << address << "\n";
     }
 
-    void input() {
-        cout << "Введіть адресу: ";
-        cin.ignore();
-        getline(cin, address);
-        cout << "Введіть поверх: ";
-        cin >> floor;
-        cout << "Введіть кількість кімнат: ";
-        cin >> rooms;
-        cout << "Введіть площу (м?): ";
-        cin >> area;
+    ~Flat() {
+        cout << "Destructor called for " << address << "\n";
     }
 
-    void display() {
-        cout << "Адреса: " << address << ", Поверх: " << floor 
-             << ", Кімнат: " << rooms << ", Площа: " << area << " м?" << endl;
+    void show() {
+        cout << "Address: " << address << ", Floor: " << floor 
+             << ", Rooms: " << rooms << ", Area: " << area << " m?\n";
     }
 };
 
 int main() {
-    const int SIZE = 3;
-    Flat flats[SIZE] = {
-        Flat("вул. Шевченка, 10", 3),
-        Flat("пр. Перемоги, 25", 5),
-        Flat()  
+    Flat flats[3] = {
+        Flat("Shevchenka St, 10", 3),
+        Flat("Peace Avenue, 25", 7),
+        Flat("Lesia Ukrainka Blvd, 15", 2)
     };
 
-    cout << "\nВведіть дані для третьої квартири:\n";
-    flats[2].input();
+    Flat customFlat("Franka St, 8", 5);
+    customFlat.rooms = 1;
+    customFlat.area = 35.5;
 
-    cout << "\nСписок усіх квартир:\n";
-    for (int i = 0; i < SIZE; i++) {
-        flats[i].display();
-    }
+    cout << "\n=== All apartments ===\n";
+    for (int i = 0; i < 3; i++) flats[i].show();
+    customFlat.show();
 
-    int searchRooms;
-    cout << "\nВведіть кількість кімнат для пошуку: ";
-    cin >> searchRooms;
-    cout << "Квартири з " << searchRooms << " кімнатами:\n";
-    for (int i = 0; i < SIZE; i++) {
-        if (flats[i].rooms == searchRooms) {
-            flats[i].display();
-        }
-    }
+    cout << "\n=== Apartments with 2 rooms ===\n";
+    for (int i = 0; i < 3; i++)
+        if (flats[i].rooms == 2) flats[i].show();
 
-    double maxArea = 40;
-    int minFloor, maxFloor;
-    cout << "\nВведіть мінімальний поверх: ";
-    cin >> minFloor;
-    cout << "Введіть максимальний поверх: ";
-    cin >> maxFloor;
-
-    cout << "\nКвартири з площею < 40 м? та між " << minFloor << " і " << maxFloor << " поверхами:\n";
-    for (int i = 0; i < SIZE; i++) {
-        if (flats[i].area < maxArea && flats[i].floor >= minFloor && flats[i].floor <= maxFloor) {
-            flats[i].display();
-        }
-    }
+    cout << "\n=== Apartments up to 40 m? on floors 1-5 ===\n";
+    if (customFlat.area < 40 && customFlat.floor >= 1 && customFlat.floor <= 5)
+        customFlat.show();
 
     return 0;
 }

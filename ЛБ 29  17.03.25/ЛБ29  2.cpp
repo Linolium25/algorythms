@@ -12,13 +12,13 @@ int main() {
     cout << "Rozmir (n x n): ";
     cin >> n;
 
-    char** matrix = new char*[n];
+    char** matrix = new char*[n];//הג.ל
     for (int i = 0; i < n; i++)
         matrix[i] = new char[n];
 
-    char vowels[] = {'A', 'E', 'I', 'O', 'U'};
+    char vowels[] = {'A', 'E', 'I', 'O', 'U'};//ל.דב.ה³אד.
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {//V.S
         for (int j = 0; j < n; j++) {
             if (i == j || i + j == n - 1) {
                 matrix[i][j] = vowels[rand() % 5]; 
@@ -26,7 +26,7 @@ int main() {
                 char letter;
                 do {
                     letter = 'A' + rand() % 26; 
-                } while (letter == 'A' || letter == 'E' || letter == 'I' || letter == 'O' || letter == 'U');
+                } while (letter == 'A' || letter == 'E' || letter == 'I' || letter == 'O' || letter == 'U'); //zal pr
                 matrix[i][j] = letter; 
             }
         }

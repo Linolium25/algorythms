@@ -81,11 +81,11 @@ int main() {
 
     Matrix A(n), B(n);
 
-              cout << "\nVvedit matricyu A:\n";
-               A.input();
+        cout << "\nVvedit matricyu A:\n";
+          A.input();
 
-               cout << "\nVvedit matricyu B:\n";
-                 B.input();
+                cout << "\nVvedit matricyu B:\n";
+                     B.input();
 
                     cout << "\nMatrix A:\n";
                         A.print();
@@ -93,7 +93,7 @@ int main() {
                             cout << "\nMatrix B:\n";
                                 B.print();
 
-                                 cout << "\nA + B:\n";
+                                   cout << "\nA + B:\n";
                                     Matrix C = A + B;
                                        C.print();
 

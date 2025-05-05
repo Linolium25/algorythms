@@ -1,6 +1,6 @@
 #include <iostream>
 #include <iomanip>
-#include <cmath> // для abs()
+#include <cmath> 
 using namespace std;
 
 class Time {
@@ -8,19 +8,19 @@ private:
     int hours, minutes, seconds;
 
 public:
-    // Конструктор з параметрами
+    // Кон.пар
     Time(int h = 0, int m = 0, int s = 0) {
         hours = h;
         minutes = m;
         seconds = s;
     }
 
-    // Деструктор
-    ~Time() {
-        // Нічого не очищаємо — просто для прикладу
+
+  ~Time() {
+      
     }
 
-    // Метод введення часу
+    //вед.
     void input() {
         cout << "Vvedit godunu, xvulunu, sekundy: ";
         cin >> hours >> minutes >> seconds;
@@ -33,23 +33,23 @@ public:
              << setw(2) << seconds << endl;
     }
 
-    // Перевантаження оператора +
+    // Перев.о.+
     Time operator+(const Time& t) const {
-        Time result;
+        Time result; //т
         result.seconds = seconds + t.seconds;
         result.minutes = minutes + t.minutes + result.seconds / 60;
         result.seconds %= 60;
         result.hours = hours + t.hours + result.minutes / 60;
         result.minutes %= 60;
-        result.hours %= 24; // обмеження 24 години
+        result.hours %= 24; 
         return result;
     }
 
-    // Перевантаження оператора -
+    // Пер.о. 
     Time operator-(const Time& t) const {
         int total1 = hours * 3600 + minutes * 60 + seconds;
         int total2 = t.hours * 3600 + t.minutes * 60 + t.seconds;
-        int diff = abs(total1 - total2); // < ось abs
+        int diff = abs(total1 - total2); // щоб не -
 
         Time result;
         result.hours = diff / 3600;
@@ -60,7 +60,7 @@ public:
 
     
     bool operator>(const Time& t) const {
-        return (hours * 3600 + minutes * 60 + seconds) > (t.hours * 3600 + t.minutes * 60 + t.seconds);
+        return (hours * 3600 + minutes * 60 + seconds) > (t.hours * 3600 + t.minutes * 60 + t.seconds);// пор.ч 
     }
 
     bool operator<(const Time& t) const {
@@ -72,14 +72,14 @@ public:
     }
 };
 
-//  Головна функція 
+
 int main() {
     Time t1, t2;
 
     cout << "Vvedennya pershogo chasu\n";
     t1.input();
 
-    cout << "Vvedennya drugoho chasu:\n";
+    cout << "Vvedennya drugoho chasu\n";
     t2.input();
 
     cout << "\nPershuy chas: ";

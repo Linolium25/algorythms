@@ -8,7 +8,7 @@ private:
     int hours, minutes, seconds;
 
 public:
-    // Кон.пар
+   
     Time(int h = 0, int m = 0, int s = 0) {
         hours = h;
         minutes = m;
@@ -26,7 +26,7 @@ public:
         cin >> hours >> minutes >> seconds;
     }
 
-    // Метод виводу часу
+    // вив.
     void display() const {
         cout << setfill('0') << setw(2) << hours << ":"
              << setw(2) << minutes << ":"
@@ -35,7 +35,7 @@ public:
 
     // Перев.о.+
     Time operator+(const Time& t) const {
-        Time result; //т
+        Time result; 
         result.seconds = seconds + t.seconds;
         result.minutes = minutes + t.minutes + result.seconds / 60;
         result.seconds %= 60;
@@ -45,11 +45,11 @@ public:
         return result;
     }
 
-    // Пер.о. 
+   
     Time operator-(const Time& t) const {
         int total1 = hours * 3600 + minutes * 60 + seconds;
         int total2 = t.hours * 3600 + t.minutes * 60 + t.seconds;
-        int diff = abs(total1 - total2); // щоб не -
+        int diff = abs(total1 - total2); // -
 
         Time result;
         result.hours = diff / 3600;
@@ -60,7 +60,7 @@ public:
 
     
     bool operator>(const Time& t) const {
-        return (hours * 3600 + minutes * 60 + seconds) > (t.hours * 3600 + t.minutes * 60 + t.seconds);// пор.ч 
+        return (hours * 3600 + minutes * 60 + seconds) > (t.hours * 3600 + t.minutes * 60 + t.seconds);
     }
 
     bool operator<(const Time& t) const {

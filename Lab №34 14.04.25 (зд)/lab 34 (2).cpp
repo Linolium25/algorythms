@@ -6,10 +6,10 @@ using namespace std;
 class Matrix {  
 private:
     int** data;  // мас. зб.
-    int size;    // Роз.
+    int size;    // Розм.
 
 public:
-    // Конст. зада.
+    // Конст. задан.
     Matrix(int n) {
         size = n;
         data = new int*[size];
@@ -31,7 +31,7 @@ public:
                 data[i][j] = rand() % (max - min + 1) + min;
     }
     
-    void print() const {
+    void print() const {// екр.
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++)
                 cout << data[i][j] << "\t";
@@ -39,7 +39,7 @@ public:
         }
     }
 
-    // Дружні функції для перевантаження операторів
+    
     friend Matrix operator+(const Matrix& a, const Matrix& b);  
     friend Matrix operator-(const Matrix& a, const Matrix& b);  
     friend Matrix operator*(const Matrix& a, const Matrix& b);  

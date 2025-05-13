@@ -10,32 +10,32 @@ protected:
     int stazh;
 
 private:
-    string prizvyshche;
+    string prizvysche;
 
 public:
     Pracivnyk(string p, int v, int s) {
-        prizvyshche = p;
+        prizvysche = p;
         vik = v;
         stazh = s;
     }
 
     void zminytyDani(string p, int v, int s) {
-        prizvyshche = p;
+        prizvysche = p;
         vik = v;
         stazh = s;
     }
 
-    void pokazatyInfo() {
-        cout << "Prizvyshche: " << prizvyshche << endl;
-        cout << "Vik: " << vik << endl;
+    void pokazatyInfo() const {
+        cout << "Pryzvysche: " << prizvysche << endl;
+        cout << "Vik: " << vik << " rokiv" << endl;
         cout << "Stazh vodinnya: " << stazh << " rokiv" << endl;
     }
 
-    int rikZPochatkuVodinnya() {
+    int rikZPochatkuVodinnya() const {
         return 2025 - stazh;
     }
 
-    int getStazh() {
+    int getStazh() const {
         return stazh;
     }
 };
@@ -51,8 +51,8 @@ private:
 
 public:
     Avtomobil() {
-        nomer = "Nevydomo";
-        marka = "Nevydomo";
+        nomer = "Nevidomo";
+        marka = "Nevidomo";
         rikVypusku = 0;
         probih = 0;
     }
@@ -71,23 +71,24 @@ public:
         probih = p;
     }
 
-    void pokazatyInfo() {
-        cout << "Reyestraciynyi nomer: " << nomer << endl;
+    void pokazatyInfo() const {
+        cout << "Nomer avto: " << nomer << endl;
         cout << "Marka: " << marka << endl;
         cout << "Rik vypusku: " << rikVypusku << endl;
         cout << "Probih: " << probih << " km" << endl;
+        cout << "Seredniy richniy probih: " << seredniyProbih() << " km/rik" << endl;
     }
 
-    double seredniyProbih() {
+    double seredniyProbih() const {
         int vik = 2025 - rikVypusku;
-        return (vik > 0) ? (double)probih / vik : probih;
+        return (vik > 0) ? static_cast<double>(probih) / vik : probih;
     }
 
-    int getRikVypusku() {
+    int getRikVypusku() const {
         return rikVypusku;
     }
 
-    int getProbih() {
+    int getProbih() const {
         return probih;
     }
 };
@@ -106,88 +107,94 @@ public:
 
     void zminytyDani() {
         try {
-            string p;
-            int v, s;
+            string p, n, m;
+            int v, s, r, pr, rpv;
+            bool sh;
 
-            cout << "Vvedit prizvyshche: ";
+            cout << "\n--- Vvedennya novykh danykh ---" << endl;
+
+            cout << "Pryzvysche: ";
             cin >> p;
 
-            cout << "Vvedit vik: ";
+            cout << "Vik: ";
             cin >> v;
-            if (v < 0) throw invalid_argument("Vik ne mozhe buty vid'yemnym");
+            if (v < 0) throw invalid_argument("Vik ne mozhe buty vid'yemnym.");
 
-            cout << "Vvedit stazh: ";
+            cout << "Stazh: ";
             cin >> s;
-            if (s < 0) throw invalid_argument("Stazh ne mozhe buty vid'yemnym");
+            if (s < 0) throw invalid_argument("Stazh ne mozhe buty vid'yemnym.");
 
             Pracivnyk::zminytyDani(p, v, s);
 
-            string n, m;
-            int r, pr;
-
-            cout << "Vvedit nomer avtivky: ";
+            cout << "Nomer avto: ";
             cin >> n;
-            cout << "Vvedit marku: ";
-            cin >> m;
-            cout << "Vvedit rik vypusku: ";
-            cin >> r;
-            if (r < 0) throw invalid_argument("Rik vypusku ne mozhe buty vid'yemnym");
 
-            cout << "Vvedit probih: ";
+            cout << "Marka avto: ";
+            cin >> m;
+
+            cout << "Rik vypusku: ";
+            cin >> r;
+            if (r < 0) throw invalid_argument("Rik vypusku ne mozhe buty vid'yemnym.");
+
+            cout << "Probih: ";
             cin >> pr;
-            if (pr < 0) throw invalid_argument("Probih ne mozhe buty vid'yemnym");
+            if (pr < 0) throw invalid_argument("Probih ne mozhe buty vid'yemnym.");
 
             Avtomobil::zminytyDani(n, m, r, pr);
 
-            cout << "Vvedit rik pochatku vykorystannya: ";
-            cin >> rikPochatku;
-            if (rikPochatku < 0) throw invalid_argument("Rik pochatku ne mozhe buty vid'yemnym");
+            cout << "Rik pochatku vykorystannya avto: ";
+            cin >> rpv;
+            if (rpv < 0) throw invalid_argument("Rik pochatku ne mozhe buty vid'yemnym.");
 
-            cout << "Chy ye shtrafy? (1 - tak, 0 - ni): ";
-            cin >> shtrafy;
+            cout << "Shtrafy? (1 - tak, 0 - ni): ";
+            cin >> sh;
+
+            rikPochatku = rpv;
+            shtrafy = sh;
 
         } catch (const exception& e) {
             cerr << "Pomylka: " << e.what() << endl;
         }
     }
 
-    void pokazatyInfo() {
-        cout << "\n* INFORMACIYa PRO VODIYa *" << endl;
+    void pokazatyInfo() const {
+        cout << "\n=== INFORMACIYA PRO VODIYA ===" << endl;
         Pracivnyk::pokazatyInfo();
         Avtomobil::pokazatyInfo();
-        cout << "Rik pochatku vykorystannya: " << rikPochatku << endl;
-        cout << "Shtrafy: " << (shtrafy ? "Tak" : "Ni") << endl;
+        cout << "Rik pochatku vykorystannya avto: " << rikPochatku << endl;
+        cout << "Nayavnist shtrafiv: " << (shtrafy ? "Tak" : "Ni") << endl;
     }
-    
-    void porivnyatyVikTaStazh() {
+
+    void porivnyatyVikTaStazh() const {
         int vikAuto = 2025 - getRikVypusku();
         int st = getStazh();
-        cout << "Vik avtivky: " << vikAuto << endl;
-        cout << "Stazh vodinnya: " << st << endl;
+
+        cout << "\n=== PORIVNYANNYA VIKU AVTO I STAZHU ===" << endl;
+        cout << "Vik avto: " << vikAuto << " rokiv" << endl;
+        cout << "Stazh vodinnya: " << st << " rokiv" << endl;
 
         if (vikAuto > st)
-            cout << "Avto starshe za stazh." << endl;
+            cout << "Avtomobil starishyy za stazh." << endl;
         else if (vikAuto < st)
-            cout << "Stazh bilshyi za vik avtivky." << endl;
+            cout << "Stazh bilshyy za vik avto." << endl;
         else
-            cout << "Stazh i vik avtivky odnakovi." << endl;
+            cout << "Stazh i vik avto odnakovi." << endl;
     }
 };
 
 int main() {
-    Vodiy v("Ivanenko", 40, 15, "AB1234CD", "Ford", 2012, 180000, 2013, true);
+    Vodiy v("Babenco", 40, 15, "AB1234CD", "Ford", 2012, 180000, 2013, true);
 
-    cout << "--- POChATKOVA INFORMACIYa ---" << endl;
+    cout << "\n--- Pochatkova informaciya ---" << endl;
     v.pokazatyInfo();
 
-    cout << "\n--- ONOVLENNYa DANIH ---" << endl;
     v.zminytyDani();
 
-    cout << "\n--- ONOVLENA INFORMACIYa ---" << endl;
+    cout << "\n--- Onovlena informaciya ---" << endl;
     v.pokazatyInfo();
 
-    cout << "\n--- PORIVNANNYa VIKU AVTO I STAZhU ---" << endl;
     v.porivnyatyVikTaStazh();
 
     return 0;
 }
+

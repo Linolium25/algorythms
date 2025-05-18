@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <stdexcept>
+#include <stdexcept> // для обробки виключних ситуацій
 
 using namespace std;
 
@@ -81,6 +81,7 @@ public:
 
     double seredniyProbih() const {
         int vik = 2025 - rikVypusku;
+        // Перевірка, щоб не було ділення на 0
         return (vik > 0) ? static_cast<double>(probih) / vik : probih;
     }
 
@@ -93,6 +94,7 @@ public:
     }
 };
 
+// Множинне наслідування — Водій отримує все з Pracivnyk та Avtomobil
 class Vodiy : public Pracivnyk, public Avtomobil {
 private:
     int rikPochatku;
@@ -118,11 +120,11 @@ public:
 
             cout << "Vik: ";
             cin >> v;
-            if (v < 0) throw invalid_argument("Vik ne mozhe buty vid'yemnym.");
+            if (v < 0) throw invalid_argument("Vik ne mozhe buty vid'yemnym."); // ?? Обробка помилки
 
             cout << "Stazh: ";
             cin >> s;
-            if (s < 0) throw invalid_argument("Stazh ne mozhe buty vid'yemnym.");
+            if (s < 0) throw invalid_argument("Stazh ne mozhe buty vid'yemnym."); 
 
             Pracivnyk::zminytyDani(p, v, s);
 
@@ -134,17 +136,17 @@ public:
 
             cout << "Rik vypusku: ";
             cin >> r;
-            if (r < 0) throw invalid_argument("Rik vypusku ne mozhe buty vid'yemnym.");
+            if (r < 0) throw invalid_argument("Rik vypusku ne mozhe buty vid'yemnym."); // ??
 
             cout << "Probih: ";
             cin >> pr;
-            if (pr < 0) throw invalid_argument("Probih ne mozhe buty vid'yemnym.");
+            if (pr < 0) throw invalid_argument("Probih ne mozhe buty vid'yemnym."); // ??
 
             Avtomobil::zminytyDani(n, m, r, pr);
 
             cout << "Rik pochatku vykorystannya avto: ";
             cin >> rpv;
-            if (rpv < 0) throw invalid_argument("Rik pochatku ne mozhe buty vid'yemnym.");
+            if (rpv < 0) throw invalid_argument("Rik pochatku ne mozhe buty vid'yemnym."); // ??
 
             cout << "Bylu shtrafy (1 - tak, 0 - ni): ";
             cin >> sh;
@@ -153,6 +155,7 @@ public:
             shtrafy = sh;
 
         } catch (const exception& e) {
+            // Вивід помилки, якщо щось пішло не так
             cerr << "Pomylka: " << e.what() << endl;
         }
     }
@@ -169,6 +172,7 @@ public:
         int vikAuto = 2025 - getRikVypusku();
         int st = getStazh();
 
+        // ?? Порівняння віку автомобіля зі стажем водія
         cout << "\n=== PORIVNYANNYA VIKU AVTO I STAZHU ===" << endl;
         cout << "Vik avto: " << vikAuto << " rokiv" << endl;
         cout << "Stazh vodinnya: " << st << " rokiv" << endl;
@@ -188,12 +192,12 @@ int main() {
     cout << "\n--- Pochatkova informaciya ---" << endl;
     v.pokazatyInfo();
 
-    v.zminytyDani();
+    v.zminytyDani(); // Введення нових даних з перевірками
 
     cout << "\n--- Onovlena informaciya ---" << endl;
     v.pokazatyInfo();
 
-    v.porivnyatyVikTaStazh();
+    v.porivnyatyVikTaStazh(); 
 
     return 0;
 }

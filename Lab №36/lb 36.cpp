@@ -146,7 +146,7 @@ public:
             cin >> rpv;
             if (rpv < 0) throw invalid_argument("Rik pochatku ne mozhe buty vid'yemnym.");
 
-            cout << "Shtrafy? (1 - tak, 0 - ni): ";
+            cout << "Bylu shtrafy (1 - tak, 0 - ni): ";
             cin >> sh;
 
             rikPochatku = rpv;
@@ -162,7 +162,7 @@ public:
         Pracivnyk::pokazatyInfo();
         Avtomobil::pokazatyInfo();
         cout << "Rik pochatku vykorystannya avto: " << rikPochatku << endl;
-        cout << "Nayavnist shtrafiv: " << (shtrafy ? "Tak" : "Ni") << endl;
+        cout << "Nayavnist shtrafiv: " << (shtrafy ? "Yas" : "No") << endl;
     }
 
     void porivnyatyVikTaStazh() const {

@@ -1,11 +1,8 @@
-Seredne arefmetushne: -1.18
-Radoc 1: 6
-Radoc 2: 6
-Radoc 3: 4
-Radoc 4: 6
-Radoc 5: 6
-Radoc 6: 4
-Radoc 7: 5
-Radoc 8: 8
-Radoc 9: 4
-Radoc 10: 4
+Matrusha:
+3	-7	-2	
+-1	5	-1	
+4	3	-3	
+Serednje arifmetychne: 0.111111
+Ryadok 1: 2
+Ryadok 2: 2
+Ryadok 3: 1

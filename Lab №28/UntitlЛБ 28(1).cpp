@@ -48,9 +48,20 @@ int main() {
     }
 
     ofstream file("result.txt");
-    file << "Seredne arefmetushne: " << average << endl;
+
+    // Додаємо матрицю до файлу
+    file << "Matrusha:\n";
     for (int i = 0; i < n; i++) {
-        file << "Radoc " << i + 1 << ": " << countArray[i] << endl;
+        for (int j = 0; j < n; j++) {
+            file << A[i][j] << "\t";
+        }
+        file << endl;
+    }
+
+    file << "Serednje arifmetychne: " << average << endl;
+
+    for (int i = 0; i < n; i++) {
+        file << "Ryadok " << i + 1 << ": " << countArray[i] << endl;
     }
     file.close();
     cout << "Zapisane y file result.txt\n";
@@ -63,3 +74,4 @@ int main() {
 
     return 0;
 }
+

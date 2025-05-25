@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <stdexcept> // для обробки виключних ситуацій
+#include <stdexcept> // vucl.sit.
 
 using namespace std;
 
@@ -36,7 +36,7 @@ public:
     }
 
     int getStazh() const {
-        return stazh;
+        return stazh;//get
     }
 };
 
@@ -49,7 +49,7 @@ private:
     string marka;
     int probih;
 
-public:
+public://bezparam
     Avtomobil() {
         nomer = "Nevidomo";
         marka = "Nevidomo";
@@ -81,7 +81,7 @@ public:
 
     double seredniyProbih() const {
         int vik = 2025 - rikVypusku;
-        // Перевірка, щоб не було ділення на 0
+        // Перевірка(cl.pomiloc)
         return (vik > 0) ? static_cast<double>(probih) / vik : probih;
     }
 
@@ -94,13 +94,13 @@ public:
     }
 };
 
-// Множинне наслідування — Водій отримує все з Pracivnyk та Avtomobil
+// Мн.nasl
 class Vodiy : public Pracivnyk, public Avtomobil {
 private:
     int rikPochatku;
     bool shtrafy;
 
-public:
+public: //yspad
     Vodiy(string p, int v, int s, string n, string m, int r, int pbg, int rpv, bool sh)
         : Pracivnyk(p, v, s), Avtomobil(n, m, r, pbg) {
         rikPochatku = rpv;
@@ -171,7 +171,6 @@ public:
         int vikAuto = 2025 - getRikVypusku();
         int st = getStazh();
 
-        //Порівняння віку автомобіля зі стажем водія
         cout << "\n=== PORIVNYANNYA VIKU AVTO I STAZHU ===" << endl;
         cout << "Vik avto: " << vikAuto << " rokiv" << endl;
         cout << "Stazh vodinnya: " << st << " rokiv" << endl;
